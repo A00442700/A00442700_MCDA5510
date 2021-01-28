@@ -1,0 +1,6 @@
+#A00447210
+
+public int min-math()
+{
+	return min-math.max()
+}

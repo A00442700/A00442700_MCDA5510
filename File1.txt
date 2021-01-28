@@ -1,0 +1,7 @@
+
+#A00447210
+
+public int multiplication (int a, int b)
+{
+	return a*b;
+}

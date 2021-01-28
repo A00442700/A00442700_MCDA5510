@@ -1,6 +1,6 @@
-#A00442700
+#A00445443
 
-Public int division (int a, int b) 
+Public int mod(int a, int b) 
 {
-   return a/b;
+   return a%b;
 }

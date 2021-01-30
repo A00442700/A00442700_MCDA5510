@@ -1,5 +1,12 @@
-# A00442700_MCDA5510
+Hi
 
-I am Nikitha Medisetty residing in Washington currently.
-Have 5 years of experience as a software Developer(java).
-My Interests are cooking and travelling.
+This is Nikitha Medisetty. 
+
+Performed Assignment 1 with Fabian and Pragathi:
+
+Create Three files with 
+1.Addition 
+2.Division and 
+3.Math Max function.
+
+Merged files with Fabian Repository.

@@ -2,11 +2,5 @@ Hi
 
 This is Nikitha Medisetty. 
 
-Performed Assignment 1 with Fabian and Pragathi:
+Submitting Assignment 1 where i have walked through the directories to find the csv files and write the data to txt file.
 
-Create Three files with 
-1.Addition 
-2.Division and 
-3.Math Max function.
-
-Merged files with Fabian Repository.

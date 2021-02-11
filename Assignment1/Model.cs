@@ -19,5 +19,7 @@ namespace Assignment1
 
         public string PostalCode {get; set;}
 
+        public string date {get; set;}
+
     }
 }

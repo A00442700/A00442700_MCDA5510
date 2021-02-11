@@ -9,6 +9,10 @@ namespace Assignment1
     {
         public int validRowS = 0;
         public int skippedRows = 0;
+
+        public int year = 0;
+        public int date = 0;
+        public int month = 0;
         List<Model> model = new List<Model>();   
         List<Exceptions> exe = new List<Exceptions>();    
         String[] csvHeader = {"First Name","Last Name","Street Number","Street","City","Province","Postal Code","Country","Phone Number","email Address"};
@@ -45,9 +49,10 @@ namespace Assignment1
                     {
                         w.Write(item + ",\t");
                     }
+                    w.Write("Date \t");
                     w.WriteLine(" ");
                     
-                    model.ForEach(x => w.WriteLine($"{x.firstName} ,\t {x.lastName} ,\t {x.streetNumber} ,\t {x.street} ,\t {x.city} ,\t {x.province} ,\t {x.country} ,\t {x.PostalCode} ,\t {x.phoneNumber} ,\t {x.email}"));
+                    model.ForEach(x => w.WriteLine($"{x.firstName} ,\t {x.lastName} ,\t {x.streetNumber} ,\t {x.street} ,\t {x.city} ,\t {x.province} ,\t {x.country} ,\t {x.PostalCode} ,\t {x.phoneNumber} ,\t {x.email} ,\t {x.date} "));
                     w.WriteLine ("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     w.WriteLine($"Valid Rows: {validRowS}");
                     w.WriteLine($"Skipped Rows : {skippedRows}");
@@ -61,6 +66,8 @@ namespace Assignment1
             catch(Exception E)
             {
                 Console.WriteLine(E.StackTrace);
+                cs.message = E.StackTrace;
+                exe.Add(cs);
                 
             }
             
@@ -76,6 +83,13 @@ namespace Assignment1
                     string[] headers = parser.ReadLine().Split(',');
                     bool val = compareArrays(headers,csvHeader);
                     
+                    //Finding Date
+                    string[] filename_split = fileName.Split("\\");
+                    
+                    int year = Int32.Parse(filename_split[filename_split.Length-4]);
+                    int month = Int32.Parse(filename_split[filename_split.Length-3]);
+                    int date = Int32.Parse(filename_split[filename_split.Length-2]);
+
                     if (val)
                     {
                         while (!parser.EndOfData)
@@ -97,15 +111,12 @@ namespace Assignment1
                             else
                             {
                                 validRowS++;
-                                try{
+                                
+                                DateTime dt = new DateTime(year, month, date);
                                 m = new Model() {firstName = fields[0], lastName = fields[1], streetNumber = fields[2], street = fields[3], city = fields[4],
-                                    province = fields[5], PostalCode = fields[6], country = fields[7], phoneNumber = fields[8], email = fields[9]};
-                                }
-                                catch(Exception)
-                                {
-                                    Console.WriteLine("got some exception....... ");
-                                    Console.WriteLine($"{m.firstName} ,\t {m.lastName} ,\t {m.streetNumber.Trim()} ,\t {m.street} ,\t {m.city} ,\t {m.province} ,\t {m.country} ,\t {m.PostalCode} ,\t {m.phoneNumber.Trim()} ,\t {m.email}");
-                                }
+                                    province = fields[5], PostalCode = fields[6], country = fields[7], phoneNumber = fields[8], email = fields[9], date = dt.ToString("yyyy/MM/dd")};
+                                
+                                
                             }
                             model.Add(m);
                         }
@@ -129,7 +140,7 @@ namespace Assignment1
                 string[] list = Directory.GetDirectories(path);
 
                 if (list == null) return;
-
+                
                 foreach (string dirpath in list)
                 {
                     if (Directory.Exists(dirpath))
@@ -142,13 +153,8 @@ namespace Assignment1
                 foreach (string filepath in fileList)
                 {       
                     //Console.WriteLine(filepath);
-                    try{
                     parse(filepath);  
-                    }
-                    catch
-                    {
-                    Console.WriteLine ("Some exeption" +filepath);
-                    }
+                    
                 }
                 append(outputFile,logFile);
             }
